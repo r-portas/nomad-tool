@@ -1,0 +1,5 @@
+src
+data
+pnpm-lock.yaml
+.nomad.hcl
+tsconfig.json

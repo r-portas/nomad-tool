@@ -2,3 +2,4 @@ node_modules
 bin
 data
 .nomad.hcl
+.DS_Store

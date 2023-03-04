@@ -2,9 +2,14 @@
 import { Command } from "commander";
 import { run } from "./nomad";
 
+const packageJson = require("../package.json");
+
 const program = new Command();
 
-program.name("nomad-tool").description("").version("1.0.0");
+program
+  .name(packageJson.name)
+  .description(packageJson.description)
+  .version(packageJson.version);
 
 program
   .command("start")

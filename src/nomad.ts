@@ -1,6 +1,7 @@
 import { cwd } from "node:process";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { stdout, stderr } from "node:process";
 import { spawn } from "node:child_process";
 
 /**
@@ -40,6 +41,13 @@ export function run() {
   generateConfig();
 
   const nomad = spawn("nomad", ["agent", "-dev", `-config=${configPath}`]);
-  nomad.stdout.on("data", (data) => console.log(data.toString()));
-  nomad.stderr.on("data", (data) => console.log(data.toString()));
+  nomad.stdout.pipe(stdout);
+  nomad.stderr.pipe(stderr);
+
+  process.on("SIGINT", () => {
+    nomad.kill("SIGINT");
+  });
+  process.on("SIGTERM", () => {
+    nomad.kill("SIGTERM");
+  });
 }

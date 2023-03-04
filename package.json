@@ -1,6 +1,6 @@
 {
   "name": "nomad-tool",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A tool for quickly spinning up Nomad for development environments",
   "bin": {
     "nomad-tool": "./bin/index.js"
