@@ -1,0 +1,30 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@types/node': ^18.14.6
+  commander: ^10.0.0
+  typescript: 5.1.0-dev.20230303
+
+dependencies:
+  commander: 10.0.0
+
+devDependencies:
+  '@types/node': 18.14.6
+  typescript: 5.1.0-dev.20230303
+
+packages:
+
+  /@types/node/18.14.6:
+    resolution: {integrity: sha512-93+VvleD3mXwlLI/xASjw0FzKcwzl3OdTCzm1LaRfqgS21gfFtK3zDXM5Op9TeeMsJVOaJ2VRDpT9q4Y3d0AvA==}
+    dev: true
+
+  /commander/10.0.0:
+    resolution: {integrity: sha512-zS5PnTI22FIRM6ylNW8G4Ap0IEOyk62fhLSD0+uHRT9McRCLGpkVNvao4bjimpK/GShynyQkFFxHhwMcETmduA==}
+    engines: {node: '>=14'}
+    dev: false
+
+  /typescript/5.1.0-dev.20230303:
+    resolution: {integrity: sha512-aDocbsouqGny1M8Kjxn8svqDUy5xoINdPpuh4t0UDoitl6nsHZ61suF1HLfMj9P/A1Bl6Tpjq6GTaRtrElq4aQ==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
