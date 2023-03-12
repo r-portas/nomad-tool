@@ -12,7 +12,7 @@ program
   .version(packageJson.version);
 
 program
-  .command("start")
+  .command("dev")
   .description("Starts a Nomad development server")
   .action(() => {
     run();

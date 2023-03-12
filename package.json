@@ -1,6 +1,6 @@
 {
   "name": "nomad-tool",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A tool for quickly spinning up Nomad for development environments",
   "bin": {
     "nomad-tool": "./bin/index.js"
@@ -11,10 +11,10 @@
     "start": "pnpm build && node bin/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "r-portas",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^18.14.6",
+    "@types/node": "^18.15.0",
     "typescript": "5.1.0-dev.20230303"
   },
   "dependencies": {

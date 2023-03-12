@@ -1,44 +1,46 @@
 import { cwd } from "node:process";
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { stdout, stderr } from "node:process";
 import { spawn } from "node:child_process";
+import { generateConfig, HostVolume } from "./nomadConfig";
 
 /**
  * The nomad config file to load
  */
 const configPath = ".nomad.hcl";
 
-function generateConfig() {
+function createConfig() {
   const data = join(cwd(), "data");
   if (!existsSync(data)) {
     console.log(`"data" directory doesn't exists, creating...`);
     mkdirSync(data);
   }
 
-  const nomadConfig = `
-bind_addr = "0.0.0.0"
+  // Generate host volumes
+  const hostVolumes: HostVolume[] = readdirSync(data, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => {
+      console.log(`Created host volume for ${d.name}`);
+      return {
+        name: d.name,
+        path: join(data, d.name),
+      };
+    });
 
-client {
-  host_volume "data" {
-    path = "${data}"
+  if (hostVolumes.length === 0) {
+    console.log(
+      `No directories within "data" folder, no host volumes created...`
+    );
   }
-}
 
-plugin "docker" {
-  config {
-    volumes {
-      enabled = true
-    }
-  }
-}
-`;
+  const nomadConfig = generateConfig(hostVolumes);
 
   writeFileSync(configPath, nomadConfig);
 }
 
 export function run() {
-  generateConfig();
+  createConfig();
 
   const nomad = spawn("nomad", ["agent", "-dev", `-config=${configPath}`]);
   nomad.stdout.pipe(stdout);
